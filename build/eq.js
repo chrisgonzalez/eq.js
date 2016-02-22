@@ -1,18 +1,18 @@
 /*
- * The global eqjs object that contains all eq.js functionality.
+ * The global cqjs object that contains all eq.js functionality.
  *
- * eqjs.nodes - List of all nodes to act upon when eqjs.states is called
- * eqjs.nodesLength - Number of nodes in eqjs.nodes
+ * cqjs.nodes - List of all nodes to act upon when cqjs.states is called
+ * cqjs.nodesLength - Number of nodes in cqjs.nodes
  *
- * eqjs.refreshNodes - Call this function to refresh the list of nodes that eq.js should act on
- * eqjs.sortObj - Sorts a key: value object based on value
- * eqjs.query - Runs through all nodes and finds their widths and points
- * eqjs.nodeWrites - Runs through all nodes and writes their eq status
+ * cqjs.refreshNodes - Call this function to refresh the list of nodes that eq.js should act on
+ * cqjs.sortObj - Sorts a key: value object based on value
+ * cqjs.query - Runs through all nodes and finds their widths and points
+ * cqjs.nodeWrites - Runs through all nodes and writes their eq status
  */
-(function (eqjs) {
+(function (cqjs) {
   'use strict';
 
-  function EQjs() {
+  function CQjs() {
     this.nodes = [];
     this.eqsLength = 0;
     this.widths = [];
@@ -61,8 +61,8 @@
    *  nodes - optional, an array or NodeList of nodes to query
    *  callback - Either boolean (`true`/`false`) to force a normal callback, or a function to use as a callback once query and nodeWrites have finished.
    */
-  EQjs.prototype.query = function (nodes, callback) {
-    var proto = Object.getPrototypeOf(eqjs);
+  CQjs.prototype.query = function (nodes, callback) {
+    var proto = Object.getPrototypeOf(cqjs);
     var length;
 
     if (callback && typeof(callback) === 'function') {
@@ -118,7 +118,7 @@
    *  widths - optional, widths of nodes to use. Only used if `nodes` is passed in
    *  points - optional, points of nodes to use. Only used if `nodes` is passed in
    */
-  EQjs.prototype.nodeWrites = function (nodes) {
+  CQjs.prototype.nodeWrites = function (nodes) {
     var i,
         j,
         k,
@@ -126,7 +126,7 @@
         callback,
         eqResizeEvent,
         eqState,
-        proto = Object.getPrototypeOf(eqjs),
+        proto = Object.getPrototypeOf(cqjs),
         widths = proto.widths,
         points = proto.points;
 
@@ -206,10 +206,10 @@
 
   /*
    * Refresh Nodes
-   * Refreshes the list of nodes for eqjs to work with
+   * Refreshes the list of nodes for cqjs to work with
    */
-  EQjs.prototype.refreshNodes = function () {
-    var proto = Object.getPrototypeOf(eqjs),
+  CQjs.prototype.refreshNodes = function () {
+    var proto = Object.getPrototypeOf(cqjs),
         cssNodes = [];
 
     proto.nodes = document.querySelectorAll('[data-break-pts]');
@@ -229,7 +229,7 @@
    * Sort Object
    * Sorts a simple object (key: value) by value and returns a sorted object
    */
-  EQjs.prototype.sortObj = function (obj) {
+  CQjs.prototype.sortObj = function (obj) {
     var arr = [];
 
     var objSplit = obj.split(',');
@@ -247,9 +247,9 @@
 
   /*
    * We only ever want there to be
-   * one instance of EQjs in an app
+   * one instance of CQjs in an app
    */
-  eqjs = eqjs || new EQjs();
+  cqjs = cqjs || new CQjs();
 
   /*
    * Document Loaded
@@ -257,16 +257,16 @@
    * Fires on document load; for HTML based EQs
    */
   addEvent(window, 'DOMContentLoaded', function () {
-    eqjs.refreshNodes();
-    eqjs.query(undefined, true);
+    cqjs.refreshNodes();
+    cqjs.query(undefined, true);
   });
 
   /*
    * Window Loaded
    */
   addEvent(window, 'load', function () {
-    eqjs.refreshNodes();
-    eqjs.query(undefined, true);
+    cqjs.refreshNodes();
+    cqjs.query(undefined, true);
   });
 
   /*
@@ -275,18 +275,18 @@
    * Loop over each `break-pts` element and pass to eqState
    */
   addEvent(window, 'resize', function () {
-    eqjs.refreshNodes();
-    window.requestAnimationFrame(eqjs.query);
+    cqjs.refreshNodes();
+    window.requestAnimationFrame(cqjs.query);
   });
 
-  // Expose 'eqjs'
+  // Expose 'cqjs'
   if (typeof module !== 'undefined' && module.exports) {
-    module.exports = eqjs;
+    module.exports = cqjs;
   } else if (typeof define === 'function' && define.amd) {
     define(function () {
-      return eqjs;
+      return cqjs;
     });
   } else {
-    window.breakjs = eqjs;
+    window.cqjs = cqjs;
   }
-})(window.breakjs);
+})(window.cqjs);
