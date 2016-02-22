@@ -87,7 +87,7 @@
       width.push(EQjs.nodes[i].offsetWidth);
       eqPts = {};
       try {
-        eqPts = JSON.parse(EQjs.nodes[i].getAttribute('eq-pts'));
+        eqPts = JSON.parse(EQjs.nodes[i].getAttribute('break-pts'));
         eqPtsValues.push(eqPts);
       }
       catch (e) {
@@ -163,7 +163,7 @@
   //////////////////////////////
   // Window Load
   //
-  // Grab all DOM elements with an `eq-pts` attribute
+  // Grab all DOM elements with a `break-pts` attribute
   // Find how many items there are
   // Save both to annon-scoped variables
   //
@@ -178,7 +178,7 @@
   //////////////////////////////
   // Window Resize
   //
-  // Loop over each `eq-pts` element and pass to eqState
+  // Loop over each `break-pts` element and pass to eqState
   //////////////////////////////
   window.onresize = eqjs.debounce(function () {
     eqjs.states();
