@@ -287,6 +287,6 @@
       return eqjs;
     });
   } else {
-    window.eqjs = eqjs;
+    window.breakjs = eqjs;
   }
-})(window.eqjs);
+})(window.breakjs);
