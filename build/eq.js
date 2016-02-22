@@ -46,7 +46,7 @@
   // Refreshes the list of nodes for eqjs to work with
   //////////////////////////////
   EQjs.prototype.refreshNodes = function () {
-    EQjs.nodes = document.querySelectorAll('[eq-pts]');
+    EQjs.nodes = document.querySelectorAll('[break-pts]');
     EQjs.nodesLength = EQjs.nodes.length;
   };
 
