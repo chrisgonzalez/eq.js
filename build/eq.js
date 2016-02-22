@@ -81,7 +81,7 @@
     for (i = 0; i < length; i++) {
       widths.push(nodes[i].offsetWidth);
       try {
-        points.push(proto.sortObj(nodes[i].getAttribute('data-eq-pts')));
+        points.push(proto.sortObj(nodes[i].getAttribute('data-break-pts')));
       }
       catch (e) {
         try {
@@ -212,7 +212,7 @@
     var proto = Object.getPrototypeOf(eqjs),
         cssNodes = [];
 
-    proto.nodes = document.querySelectorAll('[data-eq-pts]');
+    proto.nodes = document.querySelectorAll('[data-break-pts]');
 
     cssNodes = parseBefore(document.querySelector('html')).split(', ');
     cssNodes.forEach(function (v) {
@@ -272,7 +272,7 @@
   /*
    * Window Resize
    *
-   * Loop over each `eq-pts` element and pass to eqState
+   * Loop over each `break-pts` element and pass to eqState
    */
   addEvent(window, 'resize', function () {
     eqjs.refreshNodes();
